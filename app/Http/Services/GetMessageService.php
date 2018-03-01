@@ -29,11 +29,12 @@ class GetMessageService
     public function replySend($formData)
     {
         $replyToken = $formData['events']['0']['replyToken'];
+        $chatText = $formData['events']['0']['message']['text'];        
         
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
         
-        $response = $this->bot->replyText($replyToken, $this->susi->getFunction());
+        $response = $this->bot->replyText($replyToken, $this->susi->getFunction($chatText));
         
         if ($response->isSucceeded()) {
             logger("reply success!!");

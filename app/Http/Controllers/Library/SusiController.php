@@ -16,12 +16,11 @@ class SusiController extends Controller
 
     /**
      * Susi Get function
-     * @param url $url
-     * @param token_api @token
+     * @param string $chatText
      */
-    public function getFunction()
+    public function getFunction($chatText)
     {
-        $request = $this->myClient->get($this->apiURL.'capital of indonesia');
+        $request = $this->myClient->get($this->apiURL.$query);
         $response = $request->getBody();
         $data = json_decode($response, true);
         return $data['answers'][0]['actions'][0]['expression'];
