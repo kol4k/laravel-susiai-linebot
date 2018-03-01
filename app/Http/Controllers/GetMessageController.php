@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GetMessageRequest;
 use App\Http\Services\GetMessageService;
 
-class GetMessageController extends Controller
+class GetMessageController
 {
     /**
      * @var GetMessageService
