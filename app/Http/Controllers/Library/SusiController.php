@@ -21,11 +21,11 @@ class SusiController extends Controller
      */
     public function getFunction()
     {
-        // $request = $this->myClient->get($this->apiURL.$query);
-        // $response = $request->getBody();
-        // $data = json_decode($response, true);
-        // return $data['answers'][0]['actions'][0]['expression'];
-        $data = 'hai';
-        return $data;
+        $request = $this->myClient->get($this->apiURL.'capital of indonesia');
+        $response = $request->getBody();
+        $data = json_decode($response, true);
+        return $data['answers'][0]['actions'][0]['expression'];
+        // $data = 'hai';
+        // return $data;
     }
 }
