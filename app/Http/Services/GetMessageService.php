@@ -27,11 +27,10 @@ class GetMessageService
      */
     private $yandex;
 
-    public function __construct(SusiController $susi, YandexController $yandex, Request $request)
+    public function __construct(SusiController $susi, YandexController $yandex)
     {
         $this->susi = $susi;
         $this->yandex = $yandex;
-        $this->request = $request;
     }
     
     public function replySend($formData)
@@ -44,12 +43,12 @@ class GetMessageService
         
         if($chatText == '/terjemah') {
             $response = $this->bot->replyText($replyToken, 'Masukan kata kata untuk diterjemahkan, dan apabila selesai ketik: /selesai');
-            $this->request->session()->put('query', 'terjemah');
+            Request::session()->put('query', 'terjemah');
         } else if($chatText == '/selesai') {
-            $this->request->session()->forget('query');
+            Request::session()->forget('query');
         }
 
-        if($this->request->session()->get('query') == 'terjemah') {
+        if(Request::session()->get('query') == 'terjemah') {
             $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
         } else {
             $response = $this->bot->replyText($replyToken, $this->susi->getFunction($chatText));
