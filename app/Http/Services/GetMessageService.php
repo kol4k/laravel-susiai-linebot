@@ -38,6 +38,9 @@ class GetMessageService
         if ($response->isSucceeded()) {
             logger("reply success!!");
             return;
+        } else {
+            logger($response->getRawBody());
+            logger($response->getJSONDecodedBody());
         }
     }
 }
