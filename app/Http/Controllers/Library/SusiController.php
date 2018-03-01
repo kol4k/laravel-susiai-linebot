@@ -19,11 +19,13 @@ class SusiController extends Controller
      * @param url $url
      * @param token_api @token
      */
-    public function getFunction($query)
+    public function getFunction()
     {
-        $request = $this->myClient->get($this->apiURL.$query);
-        $response = $request->getBody();
-        $data = json_decode($response, true);
-        return $data['answers'][0]['actions'][0]['expression'];
+        // $request = $this->myClient->get($this->apiURL.$query);
+        // $response = $request->getBody();
+        // $data = json_decode($response, true);
+        // return $data['answers'][0]['actions'][0]['expression'];
+        $data = 'hai';
+        return $data;
     }
 }
