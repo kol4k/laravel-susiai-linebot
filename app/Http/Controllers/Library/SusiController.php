@@ -20,7 +20,7 @@ class SusiController extends Controller
      */
     public function getFunction($chatText)
     {
-        $request = $this->myClient->get($this->apiURL.$query);
+        $request = $this->myClient->get($this->apiURL.$chatText);
         $response = $request->getBody();
         $data = json_decode($response, true);
         return $data['answers'][0]['actions'][0]['expression'];
