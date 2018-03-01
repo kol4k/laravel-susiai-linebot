@@ -33,7 +33,7 @@ class GetMessageService
         $this->yandex = $yandex;
     }
     
-    public function replySend($formData, Request $r)
+    public function replySend($formData)
     {
         $replyToken = $formData['events']['0']['replyToken'];
         $chatText = $formData['events']['0']['message']['text'];        
@@ -48,6 +48,7 @@ class GetMessageService
             // $r->session()->forget('query');
             return;
         }
+        $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
 
         // if($r->session()->get('query') == 'terjemah') {
         //     $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
