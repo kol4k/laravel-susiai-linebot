@@ -2,11 +2,14 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use App\Http\Controllers\Library\SusiController;
 use App\Http\Controllers\Library\YandexController;
+use Storage;
 
 class GetMessageService
 {
@@ -34,8 +37,24 @@ class GetMessageService
         $this->request = $request;
     }
     
+    public function forgetCache($keys = []){
+        // forget
+        $defaultKey = [
+            'terjemah'
+        ];
+        if(empty($keys)){
+            $keys = $defaultKey;
+        }
+        foreach($keys as $key){
+            Cache::forget($key);
+        }
+        
+        return true;
+    }
+
     public function replySend($formData)
     {
+        $expiresAt = Carbon::now()->addMinutes(2);
         $replyToken = $formData['events']['0']['replyToken'];
         $chatText = $formData['events']['0']['message']['text'];        
         
@@ -44,12 +63,12 @@ class GetMessageService
         
         if($chatText == '/terjemah') {
             $response = $this->bot->replyText($replyToken, 'Masukan kata kata untuk diterjemahkan, dan apabila selesai ketik: /selesai');
-            $this->request->session()->put('query', 'terjemah');
+            Cache::add('terjemah', true, $expiresAt);
         } else if($chatText == '/selesai') {
-            $this->request->session()->flush();
+            $this->forgetCache();
         }
 
-        if($this->request->session()->get('query') == 'terjemah') {
+        if(Cache::get('terjemah')) {
             $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
         } else {
             $response = $this->bot->replyText($replyToken, $this->susi->getFunction($chatText));
