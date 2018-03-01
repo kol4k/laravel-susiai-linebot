@@ -24,5 +24,10 @@ class SusiController extends Controller
         $response = $request->getBody();
         $data = json_decode($response, true);
         return $data['answers'][0]['actions'][0]['expression'];
+<<<<<<< HEAD
+=======
+        // $data = 'hai';
+        // return $data;
+>>>>>>> 7276e2111611f21514468ba3396a514f29aff65f
     }
 }
