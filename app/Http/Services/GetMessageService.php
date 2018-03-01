@@ -43,16 +43,17 @@ class GetMessageService
         
         if($chatText == '/terjemah') {
             $response = $this->bot->replyText($replyToken, 'Masukan kata kata untuk diterjemahkan, dan apabila selesai ketik: /selesai');
-            $r->session()->put('query', 'terjemah');
+            // $r->session()->put('query', 'terjemah');
         } else if($chatText == '/selesai') {
-            $r->session()->forget('query');
+            // $r->session()->forget('query');
+            return;
         }
 
-        if($r->session()->get('query') == 'terjemah') {
-            $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
-        } else {
-            $response = $this->bot->replyText($replyToken, $this->susi->getFunction($chatText));
-        }
+        // if($r->session()->get('query') == 'terjemah') {
+        //     $response = $this->bot->replyText($replyToken, $this->yandex->getFunction($chatText));
+        // } else {
+        //     $response = $this->bot->replyText($replyToken, $this->susi->getFunction($chatText));
+        // }
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
