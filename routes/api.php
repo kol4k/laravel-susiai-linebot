@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('susi', 'Library\SusiController@getFunction');
+// Route::get('translate/{query}', 'Library\YandexController@getFunction');
 Route::get('/get-message', function (Request $request) { 
     logger("message request : ", $request->all());
 });
