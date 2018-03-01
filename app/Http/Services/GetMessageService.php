@@ -33,7 +33,7 @@ class GetMessageService
         $this->yandex = $yandex;
     }
     
-    public function replySend(Request $r, $formData)
+    public function replySend($formData, Request $r)
     {
         $replyToken = $formData['events']['0']['replyToken'];
         $chatText = $formData['events']['0']['message']['text'];        

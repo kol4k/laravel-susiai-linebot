@@ -18,9 +18,9 @@ class YandexController extends Controller
      * Susi Get function
      * @param string $chatText
      */
-    public function getFunction($query)
+    public function getFunction($chatText)
     {
-        $request = $this->myClient->get($this->apiURL.$query);
+        $request = $this->myClient->get($this->apiURL.$chatText);
         $response = $request->getBody();
         $data = json_decode($response, true);
         return $data['text'][0];
