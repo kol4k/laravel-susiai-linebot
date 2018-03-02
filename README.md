@@ -4,6 +4,10 @@
    - Github
    - Heroku
 
+## Tech Stack Code:
+- PHP 7.2
+- Laravel 5.5
+- Guzzle
 
 ## Steps:
 
@@ -62,3 +66,6 @@ After making app copy this link and paste it in webhook url in Line channel cons
 ![WEBHOOK_URL](/docs/images/WebHook_Url.PNG)
 
 And now you application already active.
+
+## Reference
+- Documentation from [Line Susi Node JS](https://github.com/fossasia/susi_linebot)
